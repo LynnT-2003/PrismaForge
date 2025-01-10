@@ -89,6 +89,6 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-red-bg text-foreground;
+    @apply bg-[#0a0a0a] text-foreground;
   }
 }

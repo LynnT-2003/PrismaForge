@@ -15,9 +15,9 @@ export function TemplateCard({
   subtitle,
 }: TemplateCardProps) {
   return (
-    <div className="m-2 bg-[#181818] w-[700px] h-[270px] rounded-lg border-white/[0.1] border">
+    <div className="bg-[#181818] w-[35vw] xxl:w-[25vw] rounded-lg border-white/[0.1] border">
       <div className="px-5 flex space-x-7 h-full mr-4">
-        <div className="w-3/5 my-5 flex items-center aspect-square relative">
+        <div className="w-[40%] min-h-[150px] my-5 flex items-center aspect-square relative">
           <Image
             src={thumbnail} // Using the dynamic thumbnail prop
             alt={title} // Using the title for the alt text
@@ -27,14 +27,18 @@ export function TemplateCard({
           />
         </div>
 
-        <div className="py-5 my-1 flex flex-col h-full justify-between">
-          <div className="h-full">
-            <h1 className="font-bold font-sans text-xl mb-6">{title}</h1>
-            <h1 className="font-sans text-md text-justify">{subtitle}</h1>
+        <div className="w-[60%] pt-5 pb-4 my-1 flex flex-col">
+          <div className="h-full flex flex-col">
+            <h1 className="font-bold font-sans mb-2 text-lg 2xl:text-xl">
+              {title}
+            </h1>
+            <h1 className="font-sans text-lg line-clamp-3 2xl:line-clamp-4">
+              {subtitle}
+            </h1>
+            <Button size="sm" className="mt-auto">
+              Try it out <ArrowRight className="w-3 h-5 ml-2" />
+            </Button>
           </div>
-          <Button className="w-full self-start mt-auto ml-auto mb-1 bg-white text-black font-sans text-md hover:bg-gradient-to-r hover:from-purple-900 hover:to-pink-900 hover:text-white hover:font-bold transition-all duration-300 ease-linear">
-            Try it out <ArrowRight className="w-4 h-5 ml-2" />
-          </Button>
         </div>
       </div>
     </div>

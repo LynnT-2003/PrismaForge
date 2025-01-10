@@ -1,12 +1,10 @@
 "use client";
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import MobileSidebar from "@/components/mui-mobile-drawer";
-import { AppSidebar } from "@/components/app-sidebar";
+import MobileSidebar from "@/components/mobile-sidebar";
+import { AppSidebar } from "@/components/default-sidebar";
 import localFont from "next/font/local";
 import "./globals.css";
-import { MobileSidebarItem } from "@/components/mui-mobile-drawer";
+import { MobileSidebarItem } from "@/components/mobile-sidebar";
 
 import {
   Edit,
@@ -36,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="md:w-screen overflow-x-hidden bg-red-700">
+    <html lang="en" className="md:w-screen overflow-x-hidden">
       <head>
         <Head>
           {/* Global Metadata */}

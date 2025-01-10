@@ -3,10 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-// Navigation Test
-import MobileSidebar from "@/components/mui-mobile-drawer";
-import { MobileSidebarItem } from "@/components/mui-mobile-drawer";
-
 import { onAuthStateChange } from "@/lib/firebase";
 import { User } from "firebase/auth";
 import { Button } from "@/components/ui/button";
@@ -83,20 +79,11 @@ export default function Home() {
   return (
     <div className="relative overflow-x-hidden">
       <div className="hidden md:block">
-        {/* <div className=" absolute top-0 left-0">
+        <div className=" absolute top-0 left-0">
           <HeroSection images={images} />
         </div>
         <div className="pt-[2640px]">
           <InputSection onNewImage={handleNewImage} />
-        </div> */}
-      </div>
-      <div className="flex bg-blue-50 h-[100dvh]">
-        <div className="w-full overflow-x-hidden">
-          {/* <img
-            src="/bg/bg-red.png"
-            className="absolute top-0 left-0 z-0 h-screen object-cover"
-          /> */}
-          <HomeSection />
         </div>
       </div>
     </div>

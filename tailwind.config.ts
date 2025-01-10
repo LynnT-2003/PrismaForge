@@ -25,6 +25,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "700px",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -113,6 +116,7 @@ const config: Config = {
     },
     require("tailwindcss-animate"),
     require("tailwindcss-motion"),
+    require("@tailwindcss/line-clamp"),
   ],
 };
 
