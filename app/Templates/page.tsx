@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { TemplateCard } from "@/components/template-card";
 
 const TemplatesPage = () => {
