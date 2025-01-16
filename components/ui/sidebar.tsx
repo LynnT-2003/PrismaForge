@@ -781,6 +781,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { usePathname } from "next/navigation";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -925,6 +926,7 @@ const Sidebar = React.forwardRef<
     side?: "left" | "right";
     variant?: "sidebar" | "floating" | "inset";
     collapsible?: "offcanvas" | "icon" | "none";
+    model?: string;
   }
 >(
   (
@@ -934,62 +936,72 @@ const Sidebar = React.forwardRef<
       collapsible = "offcanvas",
       className,
       children,
+      model,
       ...props
     },
     ref
   ) => {
+    const pathname = usePathname();
+
+    const getSidebarColors = (pathname: string) => {
+      if (pathname === "/templates/cartoon") {
+        return {
+          backgroundColor: "bg-blue-500", // Example for /models route
+          textColor: "text-white",
+        };
+      }
+
+      if (pathname === "/templates/christmas") {
+        return {
+          backgroundColor: "bg-red-800", // Christmas route
+          textColor: "text-white",
+        };
+      }
+
+      return {
+        backgroundColor: "bg-[#121212]", // Default color
+        textColor: "text-sidebar-foreground",
+      };
+    };
+
+    // State to store backgroundColor and textColor
+    const [sidebarColors, setSidebarColors] = React.useState({
+      backgroundColor: "bg-white",
+      textColor: "text-sidebar-foreground",
+    });
+
+    React.useEffect(() => {
+      console.log("Pathname: ", pathname);
+      // Update sidebar colors based on pathname
+      const colors = getSidebarColors(pathname);
+      setSidebarColors(colors);
+    }, [pathname]);
+
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
-    if (collapsible === "none") {
-      return (
-        <div
-          className={cn(
-            "flex h-full w-[[--sidebar-width]] flex-col bg-blue-500 z-50 text-sidebar-foreground",
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {children}
-        </div>
-      );
-    }
-
-    if (isMobile) {
-      return (
-        <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-          <SheetContent
-            data-sidebar="sidebar"
-            data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-            style={
-              {
-                "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-              } as React.CSSProperties
-            }
-            side={side}
-          >
-            <div className="flex h-full w-full flex-col">{children}</div>
-          </SheetContent>
-        </Sheet>
-      );
-    }
+    // If no model is provided, use default
+    const { backgroundColor, textColor } = model
+      ? getSidebarColors(model)
+      : sidebarColors; // Use the state for colors
 
     return (
       <div
         ref={ref}
-        className="group peer hidden md:block text-sidebar-foreground"
+        className={cn(
+          "group peer hidden md:block",
+          textColor,
+          "text-sidebar-foreground"
+        )}
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
         data-side={side}
       >
-        {/* This is what handles the sidebar gap on desktop */}
+        {/* Sidebar gap handling on desktop */}
         <div
           className={cn(
             "duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear",
-            "group-data-[collapsible=offcanvas]:w-0",
-            "group-data-[side=right]:rotate-180",
+
             variant === "floating" || variant === "inset"
               ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
@@ -1001,18 +1013,22 @@ const Sidebar = React.forwardRef<
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-            // Adjust the padding for floating and inset variants.
             variant === "floating" || variant === "inset"
               ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=right]:border-l border-white",
+              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]",
             className
           )}
           {...props}
         >
+          {/* Sidebar content */}
           {/* Change color of sidebar here */}
           <div
             data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-[#121212] group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            className={cn(
+              "flex h-full w-full bg-red-500 flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow",
+              backgroundColor, // Apply dynamic background color
+              className
+            )}
           >
             {children}
           </div>
@@ -1021,6 +1037,7 @@ const Sidebar = React.forwardRef<
     );
   }
 );
+
 Sidebar.displayName = "Sidebar";
 
 const SidebarTrigger = React.forwardRef<

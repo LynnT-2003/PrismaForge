@@ -7,18 +7,21 @@ const TemplatesPage = () => {
     {
       title: "Animate your look",
       thumbnail: "/templates/cartoon.png",
+      route: "/templates/cartoon",
       subtitle:
         "Turn any selfie into a fun and unique cartoon. Experiment with bold outlines, vibrant colors, and stylized effects to create your animated alter-ego.",
     },
     {
       title: "Christmas Theme",
       thumbnail: "/templates/christmas.png",
+      route: "/templates/christmas",
       subtitle:
         "Add a festive touch to your photos with Christmas designs. Choose from holiday lights, snow effects, and custom frames.",
     },
     {
       title: "Test your Fortune",
       thumbnail: "/templates/fortune.jpg",
+      route: "/templates/fortune",
       subtitle:
         "Get fun, personalized fortune readings in seconds. Upload your photo to reveal mystical insights with colorful illustrations and cosmic designs.",
     },
@@ -36,6 +39,7 @@ const TemplatesPage = () => {
               title={template.title}
               thumbnail={template.thumbnail}
               subtitle={template.subtitle}
+              route={template.route}
             />
           </div>
         ))}

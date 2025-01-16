@@ -1,19 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 // Define the props the component expects
 interface TemplateCardProps {
   title: string;
   thumbnail: string;
   subtitle: string;
+  route: string;
 }
 
 export function TemplateCard({
   title,
   thumbnail,
   subtitle,
+  route,
 }: TemplateCardProps) {
+  const router = useRouter();
   return (
     <div className="bg-[#181818] w-[35vw] xxl:w-[25vw] rounded-lg border-white/[0.1] border">
       <div className="px-5 flex space-x-7 h-full mr-4">
@@ -35,7 +41,11 @@ export function TemplateCard({
             <h1 className="font-sans text-lg line-clamp-3 2xl:line-clamp-4">
               {subtitle}
             </h1>
-            <Button size="sm" className="mt-auto">
+            <Button
+              size="sm"
+              className="mt-auto"
+              onClick={() => router.push(route)}
+            >
               Try it out <ArrowRight className="w-3 h-5 ml-2" />
             </Button>
           </div>

@@ -1,4 +1,4 @@
-export const buildRequestBody = (base64Image: string | null) => {
+export const buildRequestBodyChristmasModel = (base64Image: string | null) => {
   const randomNumber = Math.floor(Math.random() * 100);
 
   if (randomNumber < 32) {

@@ -84,11 +84,63 @@ body {
   }
 }
 
+.cartoon {
+  /* Primary Colors */
+  --background-primary: #01579b; /* Light gray */
+  --background-secondary: #ffffff; /* White */
+  --text-primary: #f2f2f2; /* Black */
+  --text-secondary: #555555; /* Gray for less important text */
+  --accent: #ffcc00; /* Bright yellow for highlights */
+  --border-color: #ff5733; /* Vibrant orange-red */
+
+  /* Button Styles */
+  --button-background: var(--accent);
+  --button-text-color: #ffffff;
+  --button-hover-background: #e6b800;
+  --button-hover-text-color: #000000;
+
+  /* Shadow and Effects */
+  --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
+
+  /* Typography */
+  --font-family: "Comic Sans MS", "Arial", sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 24px;
+  --font-size-small: 12px;
+}
+
+.christmas {
+  /* Primary Colors */
+  --background-primary: #c53030;
+  --background-secondary: green; /* White */
+  --text-primary: #f2f2f2; /* Black */
+  --text-secondary: #555555; /* Gray for less important text */
+  --accent: #ffcc00; /* Bright yellow for highlights */
+  --border-color: #ff5733; /* Vibrant orange-red */
+
+  /* Button Styles */
+  --button-background: var(--accent);
+  --button-text-color: #ffffff;
+  --button-hover-background: #e6b800;
+  --button-hover-text-color: #000000;
+
+  /* Shadow and Effects */
+  --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
+
+  /* Typography */
+  --font-family: "Comic Sans MS", "Arial", sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 24px;
+  --font-size-small: 12px;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-[#0a0a0a] text-foreground;
+    @apply bg-background text-foreground;
   }
 }

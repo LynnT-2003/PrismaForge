@@ -4,22 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  BookImage,
-  BookImageIcon,
-  CameraIcon,
-  ImagePlusIcon,
-} from "lucide-react";
+import { ArrowLeft, ImagePlusIcon } from "lucide-react";
 import { Alert, Snackbar } from "@mui/material";
 
 const TestPage = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const webcamRef = useRef<Webcam>(null);
   const cameraModalRef = useRef<HTMLDivElement | null>(null);
-
-  const handleOpenCamera = () => setIsCameraOpen(true);
-  const handleCloseCamera = () => setIsCameraOpen(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

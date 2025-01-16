@@ -5,8 +5,7 @@ import { ArrowRightIcon, CheckCircle2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { User } from "firebase/auth";
 import { onAuthStateChange } from "@/lib/firebase";
-import { buildRequestBody } from "@/lib/apiServices/imageGeneration";
-import { CopyIcon } from "lucide-react";
+import { buildRequestBodyChristmasModel } from "@/lib/apiServices/imageGeneration";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -37,7 +36,6 @@ const UploadSuccessScreen = () => {
   const [loading, setLoading] = useState(false);
   const [base64String, setBase64String] = useState<string | null>(null);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
-  const [template, setTemplate] = useState<string | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -45,7 +43,6 @@ const UploadSuccessScreen = () => {
       const storedFile = localStorage.getItem("uploadedFile");
       const storedTemplate = localStorage.getItem("template");
       setBase64String(storedFile);
-      setTemplate(storedTemplate);
     }
   }, []);
 
@@ -70,7 +67,7 @@ const UploadSuccessScreen = () => {
 
     console.log("Trimmed base64 string:", trimmedBased64String);
 
-    const body = buildRequestBody(trimmedBased64String);
+    const body = buildRequestBodyChristmasModel(trimmedBased64String);
     console.log("Body:", body);
 
     try {
